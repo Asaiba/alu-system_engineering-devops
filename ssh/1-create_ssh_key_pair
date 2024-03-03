@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-#this script generates an RSA key pari and specifies the bits, passphrase and file name
-
-ssh-keygen -t rsa -b 4096 -f school -N betty
+# creating and ssh key pair with password hit: man ssh-keygen
+ssh-keygen -b 4096 -t rsa -f school -N "betty"
