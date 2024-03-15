@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# Configure Nginx server so that /redirect_me is redirecting to another page
-
-sudo apt-get update -y
-sudo apt-get install -y nginx
-config=\
+#custom_http_header
+sudo apt update -y
+sudo apt install nginx -y
+host_name="$HOSTNAME"
+new_config=\
 "server {
         listen 80 default_server;
         listen [::]:80 default_server;
-        root /var/www/html;
+               root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
         server_name _;
-	add_header X-Served-By \$HOSTNAME;
+        add_header X-Served-By $host_name;
 }
 "
 sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
-echo "$config" > /etc/nginx/sites-available/default
+echo "$new_config" > /etc/nginx/sites-available/default
 sudo service nginx restart
